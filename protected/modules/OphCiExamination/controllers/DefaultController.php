@@ -125,6 +125,8 @@ class DefaultController extends \BaseEventTypeController
      */
     protected function initEdit()
     {
+        //Yii::log($this->assetPath . '!!!');
+        Yii::app()->assetManager->registerScriptFile('js/EyedrawObserver.js', 'application.modules.' . $this->getModule()->name . '.assets');
         $this->jsVars['Element_OphCiExamination_IntraocularPressure_link_instruments'] = models\Element_OphCiExamination_IntraocularPressure::model()->getSetting('link_instruments') ? 'true' : 'false';
 
         if (Yii::app()->hasModule('OphCoTherapyapplication')) {

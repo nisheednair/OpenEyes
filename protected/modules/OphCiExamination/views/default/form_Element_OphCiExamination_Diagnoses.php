@@ -16,6 +16,8 @@
  * @copyright Copyright (c) 2011-2013, OpenEyes Foundation
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
+
+Yii::app()->clientScript->registerScriptFile("{$this->assetPath}/js/Diagnoses.js", CClientScript::POS_END);
 ?>
 <div class="element-fields">
 	<input type="hidden" name="<?php echo CHtml::modelName($element);?>[force_validation]" />
