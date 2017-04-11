@@ -23,9 +23,7 @@
   border-color: gray;
   border-width: 1px;
   border-style: solid;
-  padding-left: 5px;
-  padding-right: 5px;
-
+  padding-left: 10px;
 }
 
 /* line 17, ../sass/components/_event.scss */

@@ -40,14 +40,6 @@ class Element_OphInBiometry_Calculation extends SplitEventTypeElement
     public $service;
 
     /**
-     * set defaults
-     */    
-    public function init(){
-        $this->target_refraction_left = null;
-        $this->target_refraction_right = null;
-    }
-
-    /**
      * Returns the static model of the specified AR class.
      *
      * @return the static model class
