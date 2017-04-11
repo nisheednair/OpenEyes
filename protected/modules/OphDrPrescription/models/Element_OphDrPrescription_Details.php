@@ -57,7 +57,7 @@ class Element_OphDrPrescription_Details extends BaseEventTypeElement
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('event_id, comments, draft, print, edit_reason_id, edit_reason_other', 'safe'),
+            array('event_id, comments, draft, print', 'safe'),
             array('items', 'required'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
@@ -79,7 +79,6 @@ class Element_OphDrPrescription_Details extends BaseEventTypeElement
             'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
             'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
             'items' => array(self::HAS_MANY, 'OphDrPrescription_Item', 'prescription_id'),
-            'edit_reason' => array(self::BELONGS_TO, 'OphDrPrescriptionEditReasons', 'edit_reason_id')
         );
     }
 
@@ -241,7 +240,7 @@ class Element_OphDrPrescription_Details extends BaseEventTypeElement
      */
     public function isEditable()
     {
-        return true;
+        return $this->draft;
     }
 
     /**

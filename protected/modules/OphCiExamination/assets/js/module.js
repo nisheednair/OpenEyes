@@ -841,8 +841,7 @@ $(document).ready(function() {
 
     $('#event-content').delegate('.element .segmented select', 'change', function() {
         var field = $(this).nextAll('input');
-        var containerEL = $(this).parent();
-        OphCiExamination_Refraction_updateSegmentedField(field , containerEL);
+        OphCiExamination_Refraction_updateSegmentedField(field);
     });
 
     function visualAcuityChange(target, near) {
@@ -1550,29 +1549,10 @@ rootItem = element.children('li:first').text();
 element.append(element.children('li').sort(selectSort));
 }
 
-function OphCiExamination_Refraction_updateSegmentedField(field , containerEL) {
+function OphCiExamination_Refraction_updateSegmentedField(field) {
     var parts = $(field).parent().children('select');
-
-    /*
-    If error box exists, the parent-children structure breaks
-     */
-    if (typeof parts[0] === "undefined"){
-        var parts = containerEL.children('select');
-        var value = $(parts[0]).val() * (parseFloat($(parts[1]).val()) + parseFloat($(parts[2]).val()));
-
-        if(isNaN(value)){
-            $(field).val('');
-        } else {
-            containerEL.find('input').val(value.toFixed(2));
-        }
-    } else {
-        var value = $(parts[0]).val() * (parseFloat($(parts[1]).val()) + parseFloat($(parts[2]).val()));
-        if(isNaN(value)){
-            $(field).val('');
-        } else {
-            $(field).val(value.toFixed(2));
-        }
-    }
+    var value = $(parts[0]).val() * (parseFloat($(parts[1]).val()) + parseFloat($(parts[2]).val()));
+    $(field).val(value.toFixed(2));
 }
 
 /**

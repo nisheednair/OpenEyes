@@ -333,18 +333,14 @@ $patient = Patient::model()->findByPk($patient_id);
             </div>
         </div>
     </div>
-    <?php
-    $correspondeceApp = \SettingInstallation::model()->find('`key` = "ask_correspondence_approval"');
-    if($correspondeceApp->value === "on") {
-        ?>
-        <div class="row field-row">
-            <div class="large-<?php echo $layoutColumns['label']; ?> column">
-                <label for="<?php echo get_class($element) . '_is_signed_off'; ?>">
-                    <?php echo $element->getAttributeLabel('is_signed_off') ?>:
-                </label>
-            </div>
-            <div class="large-8 column end">
-                <?php echo $form->radioButtons($element, 'is_signed_off', array(
+    <div class="row field-row">
+        <div class="large-<?php echo $layoutColumns['label']; ?> column">
+            <label for="<?php echo get_class($element) . '_is_signed_off'; ?>">
+                <?php echo $element->getAttributeLabel('is_signed_off') ?>:
+            </label>
+        </div>
+        <div class="large-8 column end">
+            <?php echo $form->radioButtons($element, 'is_signed_off', array(
                     1 => 'Yes',
                     0 => 'No',
                 ),
@@ -352,9 +348,6 @@ $patient = Patient::model()->findByPk($patient_id);
                     false, false, false, false,
                     array('nowrapper' => true)
                 ); ?>
-            </div>
         </div>
-        <?php
-    }
-    ?>
+    </div>
 </div>

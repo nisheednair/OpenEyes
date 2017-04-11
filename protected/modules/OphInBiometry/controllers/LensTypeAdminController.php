@@ -23,7 +23,6 @@ class LensTypeAdminController  extends BaseAdminController
         $admin->setListFields(array(
             'id',
             'name',
-            'display_name',
             'description',
             'acon',
             'active',
@@ -44,9 +43,6 @@ class LensTypeAdminController  extends BaseAdminController
      */
     public function actionEdit($id = false)
     {
-        $modulePath = Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.modules.OphInBiometry.assets'));
-        Yii::app()->clientScript->registerScriptFile($modulePath.'/js/admin.js', CClientScript::POS_HEAD);
-
         $admin = new Admin(OphInBiometry_LensType_Lens::model(), $this);
         if ($id) {
             $admin->setModelId($id);
@@ -54,9 +50,7 @@ class LensTypeAdminController  extends BaseAdminController
         $admin->setModelDisplayName('Lens types');
         $admin->setEditFields(array(
             'name' => 'text',
-            'display_name' => 'text',
             'description' => 'text',
-            'comments' => 'text',
             'acon' => 'text',
             'active' => 'checkbox',
         ));
