@@ -130,11 +130,31 @@ class Medication extends BaseActiveRecordVersioned
         }
     }
 
+    /**
+     * Automatically adds relevant Risk to Patient
+     * if Drug is marked a Risk through its Tags
+     *
+     * @return void
+     */
+
+    private function _autoAddRisk()
+    {
+        foreach ($this->drug->tags as $tag)
+        {
+            if(!is_null($tag->risk_id))
+            {
+                $this->patient->addRisk($tag->risk, null, $this->drug->name);
+            }
+        }
+    }
+
     public function afterSave()
     {
         if ($this->end_date) {
             $this->removePatientAdherence();
         }
+
+        $this->_autoAddRisk();
 
         return parent::afterSave();
     }
