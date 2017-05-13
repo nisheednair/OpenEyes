@@ -18,6 +18,7 @@
  * @property User $createdUser
  * @property User $lastModifiedUser
  * @property Int $active
+ * @property Risk $risk
  */
 class Tag extends BaseActiveRecordVersioned
 {
@@ -61,6 +62,7 @@ class Tag extends BaseActiveRecordVersioned
             'medication_drugs' => array(self::MANY_MANY, 'MedicationDrug', 'medication_drug_tag(medication_drug_id, tag_id)'),
 			'createdUser' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'lastModifiedUser' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
+            'risk' => array(self::BELONGS_TO ,'Risk', 'risk_id')
 		);
 	}
 
@@ -76,7 +78,9 @@ class Tag extends BaseActiveRecordVersioned
 			'last_modified_date' => 'Last Modified Date',
 			'created_user_id' => 'Created User',
 			'created_date' => 'Created Date',
-            'relateddrugscount' => 'No. of drugs tagged'
+            'relateddrugscount' => 'No. of drugs tagged',
+            'risk_id' => 'Mapped risk',
+            'risk.name' => 'Mapped risk'
 		);
 	}
 

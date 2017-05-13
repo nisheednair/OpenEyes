@@ -31,7 +31,8 @@ class TagsAdminController extends BaseAdminController
         $admin = new Admin(Tag::model(), $this);
         $admin->setListFields(array(
             'name',
-            'active'
+            'risk.name',
+            'active',
         ));
         $admin->getSearch()->addSearchItem('name');
         $admin->getSearch()->addActiveFilter();
@@ -51,6 +52,14 @@ class TagsAdminController extends BaseAdminController
         $admin->setEditFields(array(
             'name' => is_null($id) ? 'text' : 'label',
             'active' => 'checkbox',
+            'risk_id' => array(
+                'widget' => 'DropDownList',
+                'options' => CHtml::listData(Risk::model()->findAllByAttributes(array('active'=>1)), 'id', 'name'),
+                'default' => null,
+                'htmlOptions' => array('empty' => '-- Please select --'),
+                'hidden' => false,
+                'layoutColumns' => null,
+            ),
             'drugs' => array(
                 'widget' => 'CustomView',
                 'viewName' => 'application.modules.OphDrPrescription.views.admin.tag_druglist',
@@ -88,6 +97,7 @@ class TagsAdminController extends BaseAdminController
 
         $tag->name = filter_var($_POST['Tag']['name'], FILTER_SANITIZE_STRING);
         $tag->active = $_POST['Tag']['active'] == '1';
+        $tag->risk_id = $_POST['Tag']['risk_id'];
 
         if ($tag->save())
         {
