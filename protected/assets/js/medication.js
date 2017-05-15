@@ -152,6 +152,7 @@ $(document).ready(function () {
 				success: function (res) {
 					$('#medication_list').html(res);
 					closeForms(e);
+					window.location.reload();
 				},
 				error: function (xhr) {
 					if (xhr.status != 422) return;
