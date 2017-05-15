@@ -16,7 +16,7 @@
  * @copyright Copyright (c) 2011-2013, OpenEyes Foundation
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
-Yii::app()->assetManager->registerScriptFile('js/medication.js');
+Yii::app()->assetManager->registerScriptFile('js/medication.js?d=20170515');
 ?>
 <section id="medication" class="box patient-info associated-data js-toggle-container">
 	<header class="box-header">
