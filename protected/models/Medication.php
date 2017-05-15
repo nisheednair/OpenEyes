@@ -32,7 +32,6 @@
  * @property string $start_date
  * @property string $end_date
  * @property int $prescription_item_id
- * @property Tag[] $tags
  */
 class Medication extends BaseActiveRecordVersioned
 {
@@ -75,8 +74,7 @@ class Medication extends BaseActiveRecordVersioned
             'option' => array(self::BELONGS_TO, 'DrugRouteOption', 'option_id'),
             'frequency' => array(self::BELONGS_TO, 'DrugFrequency', 'frequency_id'),
             'stop_reason' => array(self::BELONGS_TO, 'MedicationStopReason', 'stop_reason_id'),
-            'patient' => array(self::BELONGS_TO, 'Patient', 'patient_id'),
-            'tags' => array(self::MANY_MANY, 'Tag', 'medication_tag(tag_id, medication_id)'),
+            'patient' => array(self::BELONGS_TO, 'Patient', 'patient_id')
         );
     }
 
@@ -139,11 +137,17 @@ class Medication extends BaseActiveRecordVersioned
 
     private function _autoAddRisk()
     {
-        foreach ($this->drug->tags as $tag)
+        foreach(array('drug', 'medication_drug') as $relation)
         {
-            if(!is_null($tag->risk_id))
+            if(isset($this->$relation->tags) && is_array($this->$relation->tags))
             {
-                $this->patient->addRisk($tag->risk, null, $this->drug->name);
+                foreach ($this->$relation->tags as $tag)
+                {
+                    if(!is_null($tag->risk_id))
+                    {
+                        $this->patient->addRisk($tag->risk, null, $this->$relation->name);
+                    }
+                }
             }
         }
     }
